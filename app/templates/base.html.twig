@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <h3>Данные клиента</h3>
+            <p>
+                ФИО: {{ basket.consignment.vehicle.client.name }}
+                {{ basket.consignment.vehicle.client.surname }}
+                {{ basket.consignment.vehicle.client.midName }}
+            </p>
+            <p>Номер телефона: {{  basket.consignment.vehicle.client.phone }}</p>
+            <br>
+            <h3>Ремонтируемая машина</h3>
+            <p>Модель: {{ basket.consignment.vehicle.model }}</p>
+            <p>Бренд: {{ basket.consignment.vehicle.brand.name }}</p>
+            <p>Год выпуска: {{ basket.consignment.vehicle.releaseDate }}</p>
+            <p>VIN: {{ basket.consignment.vehicle.vin }}</p>
+            <br>
+            <h3>Оказанные услуги</h3>
+            {% for s in services %}
+                <p> Услуга:  {{ s.job.name }}</p>
+                <p> Стоимость: {{ s.job.cost }}</p>
+            {% endfor %}
+            <h3>Новые детали</h3>
+            {% for d in details %}
+                <p>Деталь: {{ d.detail.name }}</p>
+                <p>Стоимость {{ d.detail.cost }}</p>
+            {% endfor %}
+            <br>
+
+        <h3>Общая сумма составила : <em>{{ basket.cost }}</em><h3>
+        {% endblock %}
+    </body>
+</html>

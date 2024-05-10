@@ -1,0 +1,38 @@
+version:  '3.7'
+
+services:
+  php8:
+    container_name: php8
+    build: dockerfile/php
+    restart: on-failure
+    expose:
+      - "9000"
+    volumes:
+      - ../app:/var/www/html
+      - ../app/vendor:/var/www/html/vendor
+    links:
+      - mysql5
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: on-failure
+    ports:
+      - "8080:80"
+    volumes:
+      - ../app:/var/www/html
+      - ./logs/nginx:/var/log/nginx
+      - ./config/nginx:/etc/nginx/conf.d
+    links:
+      - php8
+
+  mysql5:
+    container_name: mysql5
+    image: mysql:5.7
+    restart: on-failure
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./db:/var/lib/mysql
