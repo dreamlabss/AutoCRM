@@ -28,18 +28,7 @@ pipeline {
             }
         }
         
-        stage('Build-and-tag') {
-            when {
-                expression { DOCKER_RESISRTY = 'true' }
-            }
-            steps {
-                sh "cd docker"
-                script {
-                    def app = docker.build("dreamlabssdock/php8symfony")
-                    env.DOCKER_APP = app         
-                }
-            }
-        }
+        
         
         stage('Pulling-image-server') {
             steps {
