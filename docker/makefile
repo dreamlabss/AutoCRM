@@ -8,7 +8,7 @@ up:
 	docker compose exec php8 bin/console doctrine:migrations:migrate --no-interaction
 
 down:
-	docker compose down -d
+	docker compose down
 
 shell:
 	docker compose run php8 bash
