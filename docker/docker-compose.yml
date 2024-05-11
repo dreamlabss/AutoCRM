@@ -3,7 +3,7 @@ version:  '3.7'
 services:
   php8:
     container_name: php8
-    image: dreamlabssdock/php8symfony:latest
+    image: 'dreamlabssdock/php8symfony:latest'
     restart: on-failure
     expose:
       - "9000"
