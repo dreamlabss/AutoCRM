@@ -18,13 +18,13 @@ pipeline {
 
         stage('SCA') {
             steps {
-                build 'SCA-SAST-SNYK'
+                build 'SCA-SAST-SNYK-CRM'
             }
         }
 
         stage('SAST') {
             steps {
-                build 'SCA-SAST-SONARQUBE'
+                build 'SCA-SAST-SONARQUBE-CRM'
             }
         }
         
