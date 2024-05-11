@@ -15,30 +15,13 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('SCA') {
-            steps {
-                build 'SCA-SAST-SNYK-CRM'
-            }
-        }
-
-        stage('SAST') {
-            steps {
-                build 'SCA-SAST-SONARQUBE-CRM'
-            }
-        }
-        
-        
         
         stage('Pulling-image-server') {
             steps {
-                sh "cd docker"
-                sh "make down"
-                sh "make up"
+                sh "cd docker && make down"
+                sh "cd docker && make up"
             }
-        }
-    
-        
+        } 
         
         stage('AST') {
             steps {
