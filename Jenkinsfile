@@ -33,6 +33,7 @@ pipeline {
                 expression { DOCKER_RESISRTY = 'true' }
             }
             steps {
+                sh "cd docker"
                 script {
                     def app = docker.build("dreamlabssdock/php8symfony")
                     env.DOCKER_APP = app         
@@ -42,6 +43,7 @@ pipeline {
         
         stage('Pulling-image-server') {
             steps {
+                sh "cd docker"
                 sh "make down"
                 sh "make up"
             }
