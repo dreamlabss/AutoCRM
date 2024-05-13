@@ -29,7 +29,7 @@ pipeline {
         }
         
         
-        stage('Pulling-image-server') {
+        stage('Building docker conatiners, installing dependencies and makeing migrations') {
             steps {
                 sh "cd docker && make down"
                 sh "cd docker && make up"
@@ -38,7 +38,7 @@ pipeline {
     
         
         
-        stage('AST') {
+        stage('DAST') {
             steps {
                 build 'SECURITY-DAST-Arachini'
             }
